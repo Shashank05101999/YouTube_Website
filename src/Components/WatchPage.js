@@ -15,10 +15,14 @@ const WatchPage = () => {
   const [liked, setLiked] = useState(false);
   const [unliked, setUnliked] = useState(false);
   const [searchParams] = useSearchParams();
+
+
+  
   const dispatch = useDispatch();
+  const [showLiveChats, setShowLiveChats] = useState(false);
   useEffect(() => {
     dispatch(closeMenu());
-  },[]);
+  }, []);
 
   // .....................
 
@@ -59,9 +63,13 @@ const WatchPage = () => {
               {videoData?.snippet?.title}
             </h1>
           </div>
-          <div className="w-full">
-            <LiveChat />
-          </div>
+          {showLiveChats ? (
+            <div className="w-full">
+              <LiveChat />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <div className=" border bg-slate-300 w-[70%] rounded-3xl py-3 pl-5 ml-5 ">
           <div className="flex">
@@ -131,8 +139,14 @@ const WatchPage = () => {
                   }
                 />
               </button>
-              <div className="flex mx-[100%] ">
+              <div className="flex mx-[20%] ">
                 <HeartIcon className="text-2xl size-10 flex flex-row  hover:text-red-600" />
+                <button
+                  className=" px-8 text-2xl  hover:border border-b-slate-800  hover:shadow-2xl rounded-full hover:bg-slate-400 ml-4"
+                  onClick={() => setShowLiveChats(!showLiveChats)}
+                >
+                  LIVE
+                </button>
               </div>
             </div>
           </div>

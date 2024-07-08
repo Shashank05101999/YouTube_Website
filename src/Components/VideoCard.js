@@ -1,5 +1,4 @@
 import React from "react";
-import WatchPage from "./WatchPage";
 
 const VideoCard = ({ info }) => {
   console.log("sa", info);
@@ -12,17 +11,17 @@ const VideoCard = ({ info }) => {
 
   return (
     <div
-      className=" align-middle m-2 mr-4 p-2h-[90%] py-8 cursor-pointer shadow-2xl hover:bg-slate-200  rounded-lg  w-[400px] md:w-[300px] gap-20"
+      className="   mr-4 p-2h-[90%]  cursor-pointer shadow-2xl hover:bg-slate-200  rounded-lg  w-[800px] md:w-[300px] py-5  mx-8 "
       // onClick={handleVideoContainerClick}
     >
       <div>
         <img
           alt="img"
-          className="rounded-lg w-[350px] md:w-[300px]"
+          className="rounded-lg w-60 md:w-[300px]"
           src={thumbnails.medium.url}
         />
       </div>
-      <div className=" flex  mt-5 flex-row w-[300px]">
+      <div className=" flex  h-36 flex-row w-80 px-3">
         <div className=" mr-2 mt-2 ">
           <img
             alt="img"
@@ -37,7 +36,6 @@ const VideoCard = ({ info }) => {
           <p className="text-gray-600">{viewCount} views</p>
         </div>
       </div>
-      
     </div>
   );
 };

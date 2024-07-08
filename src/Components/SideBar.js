@@ -1,12 +1,10 @@
-import { HomeIcon, HomeModernIcon } from "@heroicons/react/16/solid";
-import { VideoCameraIcon } from "@heroicons/react/20/solid";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   return !isMenuOpen ? null : (
-    <div className="p-5 shadow-lg w-52 py-6 ">
+    <div className="p-5 shadow-lg w-60 py-9 px-7 h-[90vh] ">
       <ul className="text-center py-1 cursor-pointer ">
         <li className="hover:font-bold">
           <Link to={"/"}>home</Link>

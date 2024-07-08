@@ -2,7 +2,7 @@ import React from "react";
 
 const ChatMessage = ({ name, message }) => {
   return (
-    <div className="text-black ml-2 ">
+    <div className="text-black ml-2  ">
       <div className="py-1 flex  ">
         <img
           className="h-8 gap  bg-white rounded-full"

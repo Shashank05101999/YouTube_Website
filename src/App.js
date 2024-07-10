@@ -6,11 +6,18 @@ import store from "./utils/store";
 import { Provider } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import WatchPage from "./Components/WatchPage";
+import SearchResultContainer from "./Components/SearchResultContainer";
+
 function App() {
   const AppRouter = createBrowserRouter([
     {
       path: "/",
-      element: <Body />,
+      element: (
+        <>
+          <Head /> {/* Ensure Head is inside the Router context */}
+          <Body />
+        </>
+      ),
       children: [
         {
           path: "/",
@@ -20,15 +27,17 @@ function App() {
           path: "/watch",
           element: <WatchPage />,
         },
+        {
+          path: "/results",
+          element: <SearchResultContainer />,
+        },
       ],
     },
   ]);
+
   return (
     <Provider store={store}>
-      <div>
-        <Head />
-        <RouterProvider router={AppRouter} />
-      </div>
+      <RouterProvider router={AppRouter} />
     </Provider>
   );
 }

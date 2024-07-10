@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { toggleMenu } from "../utils/appslice";
 import { useDispatch } from "react-redux";
 import { YOUTUBE_SEARCH_API } from "../Constants/Constant";
+import { useNavigate } from "react-router-dom";
 
 const Head = () => {
   const [searchQuery, setsearchQuery] = useState("");
   const [suggestion, SetSuggestion] = useState([]);
-  const [showsuggestion, setshowsuggestion] = useState([false]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const Timer = setTimeout(() => getSearchSuggestion(), 200);
@@ -25,6 +27,12 @@ const Head = () => {
   const Dispatch = useDispatch();
   const toggleMenuHandler = () => {
     Dispatch(toggleMenu());
+  };
+
+  const handleSuggestion = (event) => {
+    setsearchQuery(event.target.innerText);
+    setShowSuggestions(false);
+    navigate("/results?search_query=" + encodeURI(event.target.innerText));
   };
 
   return (
@@ -46,12 +54,12 @@ const Head = () => {
       <div className="col-span-9">
         <div>
           <input
-            className="w-1/2 border border-gray-500 py-2 align-top rounded-l-full"
+            className="w-1/2 border border-gray-500 py-2 align-top rounded-l-full px-6"
             type="text"
             value={searchQuery}
             onChange={(e) => setsearchQuery(e.target.value)}
-            onFocus={() => setshowsuggestion(true)}
-            onBlur={() => setshowsuggestion(false)}
+            onFocus={() => setShowSuggestions(true)}
+            onBlur={() => setShowSuggestions(false)}
           />
           <button className="h-[41px] border border-gray-500 rounded-r-full align-top bg-slate-200 hover:bg-slate-500">
             <img
@@ -60,12 +68,13 @@ const Head = () => {
               src="./Images/Search-button.png"
             />
           </button>
-          {showsuggestion && (
+          {showSuggestions && (
             <div className="bg-white py-2 px-4 w-[34rem] rounded-3xl shadow-2xl absolute">
               <ul>
                 {suggestion.map((s) => (
                   <li
                     key={s}
+                    onMouseDown={(e) => handleSuggestion(e)}
                     className="px-2 py-1 flex gap-2 hover:bg-slate-300 rounded-3xl"
                   >
                     <img
@@ -94,7 +103,7 @@ const Head = () => {
         />
       </div>
       <div
-        className="  border border-cyan-600 google-element "
+        className="border border-cyan-600 google-element"
         id="google-element"
       ></div>
     </div>
